@@ -1,0 +1,182 @@
+{% extends "base.html.twig"%}
+{% block body %}
+<div class="px-4 py-5 my-5 mt-8 text-center">
+  <img class="d-block mx-auto mb-4" src="{{asset('images/logo.png')}}" alt="" width="72" height="57">
+  <h1 class="display-5 fw-bold">Des évenements près de chez vous !</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Meetup, the world’s most
+      popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive
+      prebuilt components, and powerful JavaScript plugins.</p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <button type="button" class="btn btn-danger btn-lg px-4 gap-3">Plus de détail</button>
+      <button type="button" class="btn btn-outline-secondary btn-lg px-4">ajouter un évenement</button>
+    </div>
+  </div>
+</div>
+
+<div class="container px-4 py-5" id="custom-cards">
+  <h2 class="pb-2 border-bottom">Evenements récents</h2>
+
+  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+
+{% for event in events %}
+    <div class="col-3">
+      <div class="card">
+        <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{event.name}}</h5>
+          <p class="card-text">{{event.name}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Start: {{event.startAt| date}}</li>
+          <li class="list-group-item">End: {{event.endAt| date}}</li>
+
+        </ul>
+        <div class="card-body">
+          <a href="{{path('event_show',{id: event.id})}}" class="card-link">Show Event</a>
+        </div>
+      </div>
+    </div>
+{% endfor %}
+
+
+  </div>
+</div>
+</div <div class="container px-4 py-5" id="custom-cards">
+<h2 class="pb-2 border-bottom">Endroits populaires</h2>
+
+<div class="row align-items-stretch g-4 py-5">
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="card">
+      <img src="{{ asset('images/js.png') }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Endroit 1</h5>
+        <p class="card-text">Description rapide de l'endroit</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="card-link">Events</a>
+        <a href="#" class="card-link">Visit</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+{% endblock %}

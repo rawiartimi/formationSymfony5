@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Meetup clone</title>
+
+
+    
+
+    <!-- Meetup core CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+   
+  </head>
+  <body>
+    </head><body>
+<main>
+
+<header class="p-3 mb-3 border-bottom" style="position: fixed;
+    width: 100%;
+    top: 0px;
+    background: white;
+    z-index: 1000;  ">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-centermb-lg-0 text-dark text-decoration-none">
+          <img class="d-block mx-auto" src="{{asset('images/logo.png')}}" alt="" width="60">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 link-secondary">Evenements</a></li>
+          <li><a href="#" class="nav-link px-2 link-secondary">Endroits</a></li>
+          <li><a href="#" class="nav-link px-2 link-secondary">A propos</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-lg-0 me-lg-3">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Môt clé" aria-label="Môt clé">
+            <select class="form-select" aria-label="Catégories">
+                <option>Catégories  </option>
+                <option value="4">Sport</option>
+                <option value="1">Musique</option>
+                <option value="2">Culture</option>
+                <option value="3">Dev</option>
+            </select>
+
+            <span class="input-group-text         btn btn-danger"><i class="bi bi-search"></i></span>
+            </div>
+        </form>
+        {% if app.user %}
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div>
+        {% else %}
+
+        <ul class="nav col-12 col-lg-auto   mb-md-0 float-right">
+          <li><a href="#" class="nav-link px-2 link-secondary">Login</a></li>
+          <li><a href="#" class="btn btn-danger px-2">Register</a></li>
+        </ul>
+      {% endif %}
+      </div>
+    </div>
+  </header>
+<div class="container px-4 py-5" id="custom-cards">
+  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+{% block body %}
+
+{% endblock %}
+</div>
+</div>
+
+  </main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/Meetup@5.0.2/dist/js/Meetup.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      
+  </body>
+</html>
