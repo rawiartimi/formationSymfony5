@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -21,6 +22,7 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champs est requis")
      */
     private $name;
 
@@ -31,16 +33,19 @@ class Event
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Assert\GreaterThanOrEqual("toDay")
      */
     private $startAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champs est requis")
      */
     private $adress;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Assert\GreaterThanOrEqual(propertyPath="startAt")
      */
     private $endAt;
 
@@ -153,7 +158,7 @@ class Event
     /**
      * @return User
      */
-    public function getOwner(): User
+    public function getOwner()
     {
         return $this->owner;
     }

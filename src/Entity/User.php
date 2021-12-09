@@ -119,4 +119,9 @@ class User
     {
         return $this->events;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getFirstname();
+    }
 }
