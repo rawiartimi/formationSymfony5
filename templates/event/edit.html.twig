@@ -1,0 +1,8 @@
+{% extends "base.html.twig"%}
+{% form_theme form "bootstrap_5_layout.html.twig" %}
+{% block body %}
+<form action="{{ path('event_edit', {id: form.vars.value.id}) }}" method="POST" novalidate>
+    {{ form_widget(form) }}
+    <button type="submit">Modifier l'évenement</button>
+</form>
+{% endblock body %}

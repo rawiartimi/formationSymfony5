@@ -8,29 +8,32 @@ use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Topic;
+use App\Manager\EventManager;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/event")
  */
 class EventController extends AbstractController
 {
-
     public $em;
+    public $security;
+    public $eventManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, Security $security, EventManager $eventManager)
     {
         $this->em = $entityManager;
+        $this->security = $security;
+        $this->eventManager = $eventManager;
     }
+    
     /**
      * @Route("/", name="event_index", methods={"GET"})
      */
@@ -50,35 +53,50 @@ class EventController extends AbstractController
     }
 
     /**
+     * need Authentication
      * @Route("/create", name="event_create")
      */
     public function create(Request $request)
     {
-        $event = new Event();
-        $event->setCreatedAt(new DateTimeImmutable('now'));
+        $event = $this->eventManager->createEventObject($this->getUser());
         $form = $this
-        ->createFormBuilder($event)
-        ->add('name', TextType::class)
-        ->add('startAt', DateTimeType::class, array(
-            'input' => 'datetime_immutable',
-        ))
-        ->add('endAt', DateTimeType::class, array(
-            'input' => 'datetime_immutable',
-        ))
-        ->add('adress', TextareaType::class)
-        ->add('owner', EntityType::class,['class'=>User::class])
-        ->add('topics', EntityType::class,['class'=>Topic::class,'multiple'=> true,'expanded'=> true])
-        ->getForm();
+        ->createForm(EventType::class, $event);
+        
         $form->handleRequest($request);
+        
         if($form->isSubmitted() && $form->isValid())
         {
-
-            $this->em->persist($event);
-            $this->em->flush();
+            $this->eventManager->createEvent($event);
             return $this->redirectToRoute("event_index");
-
         }
-        return $this->render('event/create.html.twig', ["form" => $form->createView()]);
+
+        return $this->render('event/create.html.twig', [
+            "form" => $form->createView()
+        ]);
+    }
+
+    
+
+    /**
+     * need Authentication
+     * @Route("/edit/{id}", name="event_edit")
+     */
+    public function edit(Request $request, Event $event)
+    {
+        $form = $this
+        ->createForm(EventType::class, $event);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->eventManager->editEvent($event);
+            return $this->redirectToRoute("event_index");
+        }
+
+        return $this->render('event/edit.html.twig', [
+            "form" => $form->createView()
+        ]);
     }
 
 }
