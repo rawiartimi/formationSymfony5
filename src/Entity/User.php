@@ -7,14 +7,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
+     * @Groups({"event.collection.read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -22,11 +27,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * @Groups({"event.collection.read"})
      * @ORM\Column(type="string", length=50)
      */
     private $firstname;
 
     /**
+     * @Groups({"event.collection.read"})
      * @ORM\Column(type="string", length=50)
      */
     private $lastname;
@@ -48,6 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles;
 
     /**
+     * @Ignore()
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="owner")
      */
     private $events;
@@ -118,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEvents(): ?ArrayCollection
+    public function getEvents()
     {
         return $this->events;
     }

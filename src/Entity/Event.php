@@ -7,13 +7,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(collectionOperations={"get"={"normalization_context"={"groups"="event.collection.read"}}},itemOperations={"get"})
  * @ORM\Entity(repositoryClass=EventRepository::class)
  */
 class Event
 {
     /**
+     * @Groups({"event.collection.read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,6 +26,7 @@ class Event
     private $id;
 
     /**
+     * @Groups({"event.collection.read"})
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champs est requis")
      */
@@ -32,6 +38,7 @@ class Event
     private $createdAt;
 
     /**
+     * @Groups({"event.collection.read"})
      * @ORM\Column(type="datetime_immutable")
      * @Assert\GreaterThanOrEqual("toDay")
      */
@@ -44,6 +51,7 @@ class Event
     private $adress;
 
     /**
+     * @Groups({"event.collection.read"})
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Assert\GreaterThanOrEqual(propertyPath="startAt")
      */
@@ -55,6 +63,8 @@ class Event
     private $topics;
 
     /**
+     * @Groups({"event.collection.read"})
+     * @ApiSubresource()
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
      */
     private $owner;

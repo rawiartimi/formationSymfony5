@@ -3,14 +3,13 @@
     {{ parent() }}
     {{ encore_entry_link_tags('event') }}
   {% endblock %}
-{% form_theme form "bootstrap_5_layout.html.twig" %}
 {% block body %}
-<form action="{{ path('event_create') }}" method="POST" novalidate>
-    {{ form_widget(form) }}
-    <button type="submit">Créer un évenement</button>
-</form>
+<div class="row" id="event_list">
+</div>
+<div class="row"><button id="loadMore">+Event</button></div>
 {% endblock body %}
    {% block javascript %}
     {{ parent() }}
     {{ encore_entry_script_tags('event') }}
+    {{ encore_entry_script_tags('eventList') }}
   {% endblock %}
